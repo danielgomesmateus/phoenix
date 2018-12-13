@@ -206,7 +206,7 @@ Configure::write('Theme', [
     'title' => 'Fênix - Soluções em TI e Assessoria Contábil',
     'logo' => [
         'mini' => '<b>Fê</b>nix',
-        'large' => '<b>Fênix</b>LTE'
+        'large' => '<b>Fênix</b>'
     ],
     'login' => [
         'show_remember' => true,

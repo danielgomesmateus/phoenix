@@ -4,32 +4,27 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * User Entity
+ * Client Entity
  *
  * @property int $id
+ * @property int $user_id
  * @property string $name
- * @property string $email
- * @property string $password
- * @property string|null $social_name
- * @property string|null $fantasy_name
- * @property string|null $cnpj
+ * @property string $phone
+ * @property string $social_name
+ * @property string $cnpj
  * @property string|null $cep
  * @property string|null $address
  * @property int|null $number
  * @property string|null $neighborhood
  * @property string|null $city
  * @property string|null $state
- * @property string|null $municipal_registration
- * @property string|null $state_registration
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
- * @property string $role
  * @property int $status
  *
- * @property \App\Model\Entity\Client[] $clients
- * @property \App\Model\Entity\Phone[] $phones
+ * @property \App\Model\Entity\User $user
  */
-class User extends Entity
+class Client extends Entity
 {
 
     /**
@@ -42,11 +37,10 @@ class User extends Entity
      * @var array
      */
     protected $_accessible = [
+        'user_id' => true,
         'name' => true,
-        'email' => true,
-        'password' => true,
+        'phone' => true,
         'social_name' => true,
-        'fantasy_name' => true,
         'cnpj' => true,
         'cep' => true,
         'address' => true,
@@ -54,22 +48,9 @@ class User extends Entity
         'neighborhood' => true,
         'city' => true,
         'state' => true,
-        'municipal_registration' => true,
-        'state_registration' => true,
         'created' => true,
         'modified' => true,
-        'role' => true,
         'status' => true,
-        'clients' => true,
-        'phones' => true
-    ];
-
-    /**
-     * Fields that are excluded from JSON versions of the entity.
-     *
-     * @var array
-     */
-    protected $_hidden = [
-        'password'
+        'user' => true
     ];
 }

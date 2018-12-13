@@ -7,23 +7,22 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Users Model
+ * Clients Model
  *
- * @property \App\Model\Table\ClientsTable|\Cake\ORM\Association\HasMany $Clients
- * @property \App\Model\Table\PhonesTable|\Cake\ORM\Association\HasMany $Phones
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  *
- * @method \App\Model\Entity\User get($primaryKey, $options = [])
- * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\User[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\User|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\User|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\User patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\User[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\User findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Client get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Client newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Client[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Client|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Client|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Client patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Client[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Client findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class UsersTable extends Table
+class ClientsTable extends Table
 {
 
     /**
@@ -36,17 +35,15 @@ class UsersTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('users');
-        $this->setDisplayField('id');
+        $this->setTable('clients');
+        $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('Clients', [
-            'foreignKey' => 'user_id'
-        ]);
-        $this->hasMany('Phones', [
-            'foreignKey' => 'user_id'
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -69,31 +66,22 @@ class UsersTable extends Table
             ->notEmpty('name');
 
         $validator
-            ->email('email')
-            ->requirePresence('email', 'create')
-            ->notEmpty('email')
-            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
-        $validator
-            ->scalar('password')
-            ->maxLength('password', 100)
-            ->requirePresence('password', 'create')
-            ->notEmpty('password');
+            ->scalar('phone')
+            ->maxLength('phone', 15)
+            ->requirePresence('phone', 'create')
+            ->notEmpty('phone');
 
         $validator
             ->scalar('social_name')
             ->maxLength('social_name', 50)
-            ->allowEmpty('social_name');
-
-        $validator
-            ->scalar('fantasy_name')
-            ->maxLength('fantasy_name', 50)
-            ->allowEmpty('fantasy_name');
+            ->requirePresence('social_name', 'create')
+            ->notEmpty('social_name');
 
         $validator
             ->scalar('cnpj')
             ->maxLength('cnpj', 18)
-            ->allowEmpty('cnpj');
+            ->requirePresence('cnpj', 'create')
+            ->notEmpty('cnpj');
 
         $validator
             ->scalar('cep')
@@ -125,22 +113,6 @@ class UsersTable extends Table
             ->allowEmpty('state');
 
         $validator
-            ->scalar('municipal_registration')
-            ->maxLength('municipal_registration', 25)
-            ->allowEmpty('municipal_registration');
-
-        $validator
-            ->scalar('state_registration')
-            ->maxLength('state_registration', 25)
-            ->allowEmpty('state_registration');
-
-        $validator
-            ->scalar('role')
-            ->maxLength('role', 10)
-            ->requirePresence('role', 'create')
-            ->notEmpty('role');
-
-        $validator
             ->integer('status')
             ->requirePresence('status', 'create')
             ->notEmpty('status');
@@ -157,7 +129,7 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

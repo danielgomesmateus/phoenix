@@ -42,6 +42,7 @@ class AppController extends Controller
         parent::initialize();
 
         $this->loadComponent('Auth', [
+            'authError' => 'Você não tem permissão para acessar esta página!',
             'authenticate' => [
                 'Form' => [
                     'fields' => [

@@ -1,33 +1,71 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\User $user
- */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $user->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
-    <fieldset>
-        <legend><?= __('Edit User') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('email');
-            echo $this->Form->control('password');
-            echo $this->Form->control('role');
-            echo $this->Form->control('status');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<div class="col-md-12 col-xs-12 col-sm-12">
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                Editar dados
+            </h3>
+        </div>
+        <?php echo $this->Form->create($user); ?>
+            <div class="box-body">
+                <div class="col-md-6 col-xs-12 col-sm-12">
+                    <div class="form-group">
+                        <?php echo $this->Form->control('name', ['label' => 'Nome completo:', 'class' => 'form-control', 'id' => 'name', 'required' => 'required', 'maxlength' => 35]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('email', ['label' => 'Email de contato:', 'class' => 'form-control', 'id' => 'email', 'required' => 'required', 'maxlength' => 35]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('password', ['label' => 'Senha de acesso:', 'class' => 'form-control', 'id' => 'password', 'maxlength' => 35, 'minlength' => 6, 'value' => '']); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('social_name', ['label' => 'Razão social:', 'class' => 'form-control', 'id' => 'social_name', 'required' => 'required', 'maxlength' => 50]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('fantasy_name', ['label' => 'Nome fantasia:', 'class' => 'form-control', 'id' => 'fantasy_name', 'required' => 'required', 'maxlength' => 50]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('cnpj', ['label' => 'CNPJ:', 'class' => 'form-control', 'id' => 'cnpj', 'required' => 'required', 'maxlength' => 18]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('cep', ['label' => 'CEP:', 'class' => 'form-control', 'id' => 'cep', 'required' => 'required', 'maxlength' => 9]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('address', ['label' => 'Endereço:', 'class' => 'form-control', 'id' => 'address', 'required' => 'required', 'maxlength' => 100]); ?>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12 col-sm-12">
+                    <div class="form-group">
+                        <?php echo $this->Form->control('number', ['label' => 'Nº:', 'class' => 'form-control', 'id' => 'number', 'maxlength' => 5, 'type' => 'number']); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('neighborhood', ['label' => 'Bairro:', 'class' => 'form-control', 'id' => 'neighborhood', 'required' => 'required', 'maxlength' => 50]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('city', ['label' => 'Cidade:', 'class' => 'form-control', 'id' => 'city', 'maxlength' => 35]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('state', ['label' => 'Estado:', 'class' => 'form-control', 'id' => 'state', 'required' => 'required', 'maxlength' => 2]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('municipal_registration', ['label' => 'Registro municipal:', 'class' => 'form-control', 'id' => 'municipal_registration', 'maxlength' => 25]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('state_registration', ['label' => 'Registro estadual:', 'class' => 'form-control', 'id' => 'state_registration', 'maxlength' => 25]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('phones.0.landline', ['label' => 'Telefone fixo:', 'class' => 'form-control', 'id' => 'landline', 'maxlength' => 14]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('phones.0.cell_phone', ['label' => 'Celular:', 'class' => 'form-control', 'id' => 'cell_phone', 'maxlength' => 15]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('phones.0.id', ['type' => 'hidden']); ?>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        <?php echo $this->Form->end(); ?>
+    </div>
 </div>

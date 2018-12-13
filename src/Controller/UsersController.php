@@ -27,6 +27,7 @@ class UsersController extends AppController {
         if(in_array($this->request->action, $actions)) {
 
             $this->viewBuilder()->theme('AdminLTE');
+            $this->viewBuilder()->setClassName('AdminLTE.AdminLTE');
         }
     }
 
@@ -55,7 +56,7 @@ class UsersController extends AppController {
                 if($user) {
 
                     $this->Auth->setUser($user);
-                    return $this->redirect(['controller' => 'home']);
+                    return $this->redirect(['controller' => 'users']);
                 }
                 else {
 
@@ -85,14 +86,17 @@ class UsersController extends AppController {
             
                 $user = $this->Users->patchEntity($user, $this->request->getData());
 
-                // Usuário ativo do tipo user
+                // Usuário ativo
                 $user->status = 1;
-                $user->role   = 'user';
 
                 if($this->Users->save($user)) {
                     
                     $this->Flash->success(__('Conta de usuário criada com sucesso!'));
-                    return $this->redirect(['action' => 'login']);
+
+                    $user = $this->Auth->identify();
+                    $this->Auth->setUser($user);
+
+                    return $this->redirect(['action' => 'edit']);
                 }
 
                 $this->Flash->error(__('Erro ao salvar usuário! Tente novamente.'));
@@ -108,21 +112,24 @@ class UsersController extends AppController {
 
     public function edit($id = null) 
     {
+        
+        $id = $id ?? (int) $this->Auth->user('id');
+        
         $user = $this->Users->get($id, [
-            'contain' => []
+            'contain' => ['Phones']
         ]);
 
         if($this->request->is(['patch', 'post', 'put'])) {
-            
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            
+
+            $user = $this->Users->patchEntity($user, $this->request->getData(), ['associated' => ['Phones']]);
+
             if($this->Users->save($user)) {
 
-                $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('Usuário salvo com sucesso!'));
+                return $this->redirect(['action' => 'edit']);
             }
 
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('Erro ao salvar usuário! Tente novamente.'));
         }
 
         $this->set(compact('user'));

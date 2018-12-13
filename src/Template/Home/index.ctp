@@ -48,7 +48,6 @@
                 </div>
             </div>
             <div class="col-md-4 col-xs-12 col-sm-12">
-                <img src="dist/images/" class="img-responsive">
                 <?php echo $this->Html->image('meeting-1453895_640.png', ['class' => 'img-responsive']); ?>
             </div>
         </div>
