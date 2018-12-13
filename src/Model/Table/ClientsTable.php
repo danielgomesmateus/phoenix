@@ -81,7 +81,8 @@ class ClientsTable extends Table
             ->scalar('cnpj')
             ->maxLength('cnpj', 18)
             ->requirePresence('cnpj', 'create')
-            ->notEmpty('cnpj');
+            ->notEmpty('cnpj')
+            ->add('cnpj', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('cep')
@@ -129,6 +130,7 @@ class ClientsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->isUnique(['cnpj']));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;

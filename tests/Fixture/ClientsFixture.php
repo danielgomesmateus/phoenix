@@ -37,6 +37,7 @@ class ClientsFixture extends TestFixture
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'cnpj' => ['type' => 'unique', 'columns' => ['cnpj'], 'length' => []],
             'clients_ibfk_1' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
@@ -67,8 +68,8 @@ class ClientsFixture extends TestFixture
                 'neighborhood' => 'Lorem ipsum dolor sit amet',
                 'city' => 'Lorem ipsum dolor sit amet',
                 'state' => 'Lo',
-                'created' => '2018-12-13 17:59:26',
-                'modified' => '2018-12-13 17:59:26',
+                'created' => '2018-12-13 21:01:42',
+                'modified' => '2018-12-13 21:01:42',
                 'status' => 1
             ],
         ];

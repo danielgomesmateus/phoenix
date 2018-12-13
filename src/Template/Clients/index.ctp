@@ -54,11 +54,21 @@
                             <?php } ?>
                         </td>
                         <td>
-                            <?php
-                                echo $this->Html->link('<i class="fa fa-search" aria-hidden="true"></i>', ['controller' => 'clients', 'action' => 'view', $client->id], ['alt' => 'Visualizar cliente', 'title' => 'Visualizar cliente', 'escape' => false]);
-                                echo $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['controller' => 'clients', 'action' => 'edit', $client->id], ['alt' => 'Editar cliente', 'title' => 'Editar cliente', 'escape' => false]);
-                                echo $this->Html->link('<i class="fa fa-trash" aria-hidden="true"></i>', ['controller' => 'clients', 'action' => 'view'], ['alt' => 'Apagar cliente', 'title' => 'Apagar cliente', 'escape' => false]);
-                            ?>
+                            <div>
+                                <?php
+                                    echo $this->Html->link('<i class="fa fa-search" aria-hidden="true"></i> Visualizar cliente', ['controller' => 'clients', 'action' => 'view', $client->id], ['alt' => 'Visualizar cliente', 'title' => 'Visualizar cliente', 'escape' => false]);
+                                ?>
+                            </div>
+                            <div>
+                                <?php    
+                                    echo $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i> Editar cliente', ['controller' => 'clients', 'action' => 'edit', $client->id], ['alt' => 'Editar cliente', 'title' => 'Editar cliente', 'escape' => false]);
+                                ?>
+                            </div>
+                            <div>
+                                <?php    
+                                    echo $this->Html->link('<i class="fa fa-trash" aria-hidden="true"></i> Apagar cliente', ['controller' => 'clients', 'action' => 'view'], ['alt' => 'Apagar cliente', 'title' => 'Apagar cliente', 'escape' => false]);
+                                ?>
+                            </div>
                         </td>
                     </tr>
                     <?php } ?>

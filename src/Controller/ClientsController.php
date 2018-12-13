@@ -30,7 +30,7 @@ class ClientsController extends AppController {
             'limit' => 20
         ];
 
-        $clients = $this->paginate($this->Clients->find('all', ['user_id' => $this->Auth->user('id')]));
+        $clients = $this->paginate($this->Clients->find('all', ['conditions' => ['user_id' => $this->Auth->user('id')]]));
         $this->set(compact('clients'));
     }
 

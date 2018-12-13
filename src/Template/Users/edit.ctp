@@ -1,4 +1,4 @@
-<div class="col-md-12 col-xs-12 col-sm-12">
+<div class="container-fluid">
     <div class="box box-danger">
         <div class="box-header with-border">
             <h3 class="box-title">

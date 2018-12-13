@@ -56,6 +56,11 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
 
+        if($this->Auth->user()) {
+
+            $this->set('userData', $this->Auth->user());
+        }
+
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
