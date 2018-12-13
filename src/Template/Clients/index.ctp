@@ -1,5 +1,5 @@
 <div class="col-xs-12">
-    <div class="box">
+    <div class="box box-danger" style="margin-top:15px;">
         <div class="box-header">
             <h3 class="box-title">
                 Clientes

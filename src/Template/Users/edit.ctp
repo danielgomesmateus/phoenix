@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="box box-danger">
+    <div class="box box-danger" style="margin-top:15px;">
         <div class="box-header with-border">
             <h3 class="box-title">
                 Editar dados

@@ -42,5 +42,28 @@
                 </a>
             </li>
         </ul>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-diamond"></i> 
+                <span>
+                    Lançamentos
+                </span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a href="<?php echo $this->Url->build('/'); ?>">
+                        <i class="fa fa-plus"></i> Adicionar lançamento
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo $this->Url->build('/'); ?>">
+                        <i class="fa fa-list"></i> Listar lançamentos
+                    </a>
+                </li>
+            </ul>
+        </li>
     </li>
 </ul>
