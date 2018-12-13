@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Controller;
+
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 class UsersController extends AppController {
 
@@ -10,6 +13,21 @@ class UsersController extends AppController {
         
         $this->Auth->allow(['register']);
         $this->loadComponent('Recaptcha.Recaptcha');
+    }
+
+    public function beforeRender(Event $event) {
+
+        $actions = [
+            'index',
+            'view',
+            'edit',
+            'delete'
+        ];
+
+        if(in_array($this->request->action, $actions)) {
+
+            $this->viewBuilder()->theme('AdminLTE');
+        }
     }
 
     public function index() {

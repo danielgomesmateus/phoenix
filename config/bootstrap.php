@@ -201,3 +201,18 @@ Type::build('timestamp')
 //Inflector::rules('irregular', ['red' => 'redlings']);
 //Inflector::rules('uninflected', ['dontinflectme']);
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
+
+Configure::write('Theme', [
+    'title' => 'Fênix - Soluções em TI e Assessoria Contábil',
+    'logo' => [
+        'mini' => '<b>Fê</b>nix',
+        'large' => '<b>Fênix</b>LTE'
+    ],
+    'login' => [
+        'show_remember' => true,
+        'show_register' => true,
+        'show_social' => true
+    ],
+    'folder' => ROOT,
+    'skin' => 'red'
+]);

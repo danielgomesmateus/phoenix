@@ -35,6 +35,7 @@ class Application extends BaseApplication
     public function bootstrap()
     {
         $this->addPlugin('Recaptcha', ['bootstrap' => true, 'routes' => true]);
+        $this->addPlugin('AdminLTE', ['bootstrap' => true, 'routes' => true]);
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
