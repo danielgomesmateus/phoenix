@@ -41,6 +41,15 @@ class AppController extends Controller
     {
         parent::initialize();
 
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email'
+                    ]
+                ]
+            ]
+        ]);
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
         ]);
