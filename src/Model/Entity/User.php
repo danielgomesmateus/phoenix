@@ -63,7 +63,8 @@ class User extends Entity
         'role' => true,
         'status' => true,
         'clients' => true,
-        'phones' => true
+        'phones' => true,
+        'images' => true
     ];
 
     /**

@@ -35,5 +35,12 @@ class AppView extends View
      * @return void
      */
     public function initialize() {
+            
+        $config = [
+            'autoScript' => true,
+        ];
+        $this->loadHelper('Geo.GoogleMap', $config);
+
+        $this->set('link', $this->GoogleMap->mapLink('<To Munich>!', ['to' => '<Munich>, Germany']));
     }
 }

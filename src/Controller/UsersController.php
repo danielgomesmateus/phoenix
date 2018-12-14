@@ -11,8 +11,38 @@ class UsersController extends AppController {
 
         parent::initialize();
         
-        $this->Auth->allow(['register']);
+        $this->Auth->allow(['register', 'login', 'logout']);
         $this->loadComponent('Recaptcha.Recaptcha');
+        $this->loadComponent('UploadImage');
+    }
+
+    public function isAuthorized($user = null) {
+
+        if($user['role'] == 'company') {
+            
+            if(in_array($this->request->getParam('action'), ['view', 'edit', 'delete'])) {
+
+                return true;
+            }
+        }
+
+        if($user['role'] == 'accounting') {
+            
+            if(in_array($this->request->getParam('action'), ['edit', 'delete'])) {
+
+                return true;
+            }
+        }
+
+        if($user['role'] == 'admin') {
+            
+            if(in_array($this->request->getParam('action'), ['index', 'view', 'delete', 'alterStatus'])) {
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function beforeRender(Event $event) {
@@ -33,7 +63,7 @@ class UsersController extends AppController {
 
     public function index() {
         
-        $users = $this->paginate($this->Users);
+        $users = $this->paginate($this->Users, ['limit' => 20]);
         $this->set(compact('users'));
     }
 
@@ -56,7 +86,15 @@ class UsersController extends AppController {
                 if($user) {
 
                     $this->Auth->setUser($user);
-                    return $this->redirect(['controller' => 'users']);
+
+                    if($user['role'] == 'admin') {
+
+                        return $this->redirect(['controller' => 'users']);
+                    }
+                    else {
+
+                        return $this->redirect(['controller' => 'users', 'action' => 'edit']);
+                    }
                 }
                 else {
 
@@ -110,18 +148,35 @@ class UsersController extends AppController {
         $this->set(compact('user'));
     }
 
-    public function edit($id = null) 
-    {
+    public function edit($id = null) {
         
         $id = $id ?? (int) $this->Auth->user('id');
         
         $user = $this->Users->get($id, [
-            'contain' => ['Phones']
+            'contain' => ['Images', 'Phones']
         ]);
 
         if($this->request->is(['patch', 'post', 'put'])) {
+            
+            $config = [
+                'dir'  => 'users',
+                'type' => 'profile'
+            ];
+            
+            $data = $this->UploadImage->save($this->request->getData(), $config);
 
-            $user = $this->Users->patchEntity($user, $this->request->getData(), ['associated' => ['Phones']]);
+            if(!($data)) {
+
+                $this->Flash->error(__('Verifique o formato e tamanho da imagem!'));
+                return $this->redirect(['action' => 'edit']); 
+            }
+
+            $user = $this->Users->patchEntity($user, $data, [
+                'associated' => [
+                    'Images', 
+                    'Phones'
+                ]
+            ]);
 
             if($this->Users->save($user)) {
 
@@ -150,5 +205,33 @@ class UsersController extends AppController {
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function alterStatus($id = null) {
+
+        if($this->request->is(['post', 'put'])) {
+            
+            if($id == null) {
+
+                $this->Flash->error(__('Empresa/Contabilidade não encontrado!'));
+            }
+            else {
+
+                $users = TableRegistry::get('Users');
+                $user  = $users->get($id);
+
+                $status = $user->status == 1 ? 0 : 1;
+
+                $users->query()
+                       ->update()
+                       ->set(['status' => $status])
+                       ->where(['id' => $id])
+                       ->execute();
+                
+                $this->Flash->success(__('Empresa/Contabilidade atualizado com sucesso!'));
+            }
+            
+            return $this->redirect(['controller' => 'users']);
+        }
     }
 }

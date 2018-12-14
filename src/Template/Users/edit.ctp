@@ -5,7 +5,7 @@
                 Editar dados
             </h3>
         </div>
-        <?php echo $this->Form->create($user); ?>
+        <?php echo $this->Form->create($user, ['type' => 'file']); ?>
             <div class="box-body">
                 <div class="col-md-6 col-xs-12 col-sm-12">
                     <div class="form-group">
@@ -32,11 +32,11 @@
                     <div class="form-group">
                         <?php echo $this->Form->control('address', ['label' => 'Endereço:', 'class' => 'form-control', 'id' => 'address', 'required' => 'required', 'maxlength' => 100]); ?>
                     </div>
-                </div>
-                <div class="col-md-6 col-xs-12 col-sm-12">
                     <div class="form-group">
                         <?php echo $this->Form->control('number', ['label' => 'Nº:', 'class' => 'form-control', 'id' => 'number', 'maxlength' => 5, 'type' => 'number']); ?>
                     </div>
+                </div>
+                <div class="col-md-6 col-xs-12 col-sm-12">
                     <div class="form-group">
                         <?php echo $this->Form->control('neighborhood', ['label' => 'Bairro:', 'class' => 'form-control', 'id' => 'neighborhood', 'required' => 'required', 'maxlength' => 50]); ?>
                     </div>
@@ -60,6 +60,12 @@
                     </div>
                     <div class="form-group">
                         <?php echo $this->Form->control('phones.0.id', ['type' => 'hidden']); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('images.0.image', ['label' => 'Imagem', 'type' => 'file']); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('images.0.id', ['type' => 'hidden']); ?>
                     </div>
                 </div>
             </div>

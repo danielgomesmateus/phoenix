@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 /**
  * Application Controller
@@ -45,11 +46,14 @@ class AppController extends Controller
             'authError' => 'Você não tem permissão para acessar esta página!',
             'authenticate' => [
                 'Form' => [
+                    'userModel' => 'Users',
+                    'finder' => 'auth',
                     'fields' => [
                         'username' => 'email'
                     ]
                 ]
-            ]
+            ],
+            'authorize' => 'Controller'
         ]);
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
@@ -58,7 +62,20 @@ class AppController extends Controller
 
         if($this->Auth->user()) {
 
-            $this->set('userData', $this->Auth->user());
+            $images = TableRegistry::get('Images');
+            $image  = $images->find()->select(['image'])->where(['type' => 'profile', 'status' => 1, 'user_id' => $this->Auth->user('id')])->toArray();
+
+            $data['name']    = $this->Auth->user('name');
+            $data['email']   = $this->Auth->user('email');
+            $data['created'] = $this->Auth->user('created');
+            $data['role']    = $this->Auth->user('role');
+
+            if(isset($image[0]['image'])) {
+                
+                $data['image']   = $image[0]['image'];
+            }
+
+            $this->set('userData', $data);
         }
 
         /*

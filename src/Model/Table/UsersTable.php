@@ -45,6 +45,9 @@ class UsersTable extends Table
         $this->hasMany('Clients', [
             'foreignKey' => 'user_id'
         ]);
+        $this->hasMany('Images', [
+            'foreignKey' => 'user_id'
+        ]);
         $this->hasMany('Phones', [
             'foreignKey' => 'user_id'
         ]);
@@ -160,5 +163,13 @@ class UsersTable extends Table
         $rules->add($rules->isUnique(['email']));
 
         return $rules;
+    }
+
+    public function findAuth(\Cake\ORM\Query $query, array $options) {
+        
+        $query
+            ->where(['Users.status' => 1]);
+
+        return $query;
     }
 }

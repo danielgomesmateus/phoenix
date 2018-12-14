@@ -32,10 +32,11 @@ class Application extends BaseApplication
     /**
      * {@inheritDoc}
      */
-    public function bootstrap()
-    {
+    public function bootstrap() {
+        
         $this->addPlugin('Recaptcha', ['bootstrap' => true, 'routes' => true]);
         $this->addPlugin('AdminLTE', ['bootstrap' => true, 'routes' => true]);
+        $this->addPlugin('Geo');
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
