@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="box box-danger" style="margin-top:15px;">
+    <div class="box box-primary" style="margin-top:15px;">
         <div class="box-header with-border">
             <h3 class="box-title">
                 <i class="fa fa-globe"></i> <?php echo $partner->name; ?> - (<?php echo $partner->social_name; ?>)

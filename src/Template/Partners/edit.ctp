@@ -1,5 +1,5 @@
 <div class="col-md-12 col-xs-12 col-sm-12">
-    <div class="box box-danger" style="margin-top:15px;">
+    <div class="box box-primary" style="margin-top:15px;">
         <div class="box-header with-border">
             <h3 class="box-title">
                 Editar cliente

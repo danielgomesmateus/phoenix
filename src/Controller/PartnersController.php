@@ -52,18 +52,8 @@ class PartnersController extends AppController {
     
     public function index($option = null) {
 
-        $options = [
-            'client',
-            'provider'
-        ];
+        $option = $option ?? 'client';
 
-        if(!(in_array($option, $options))) {
-
-            $this->Flash->error(__('Erro ao processar solicitação! Tente novamente.'));
-            return $this->redirect(['action' => 'index', 'client']);
-        }
-
-        
         $this->paginate = [
             'contain' => ['Users'],
             'limit' => 20
@@ -177,7 +167,7 @@ class PartnersController extends AppController {
                 $status = $partner->status == 1 ? 0 : 1;
 
                 $partners->query()
-                       ->update()
+                        ->update()
                        ->set(['status' => $status])
                        ->where(['id' => $id])
                        ->execute();
@@ -185,7 +175,7 @@ class PartnersController extends AppController {
                 $this->Flash->success(__('Usuário atualizado com sucesso!'));
             }
             
-            return $this->redirect(['controller' => 'partners']);
+            return $this->redirect($this->referer());
         }
     }
 }

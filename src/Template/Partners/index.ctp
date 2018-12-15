@@ -1,5 +1,5 @@
 <div class="col-xs-12">
-    <div class="box box-danger" style="margin-top:15px;">
+    <div class="box box-primary" style="margin-top:15px;">
         <div class="box-header">
             <h3 class="box-title">
                 <?php echo $option == 'client' ? "Clientes" : 'Fornecedores'; ?>
