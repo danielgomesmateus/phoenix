@@ -2,7 +2,7 @@
     <div class="box box-danger" style="margin-top:15px;">
         <div class="box-header">
             <h3 class="box-title">
-                Empresas/Contabilidades
+                Usuários
             </h3>
         </div>
         <div class="box-body table-responsive no-padding">
@@ -23,6 +23,9 @@
                         </th>
                         <th>
                             CNPJ
+                        </th>
+                        <th>
+                            Tipo
                         </th>
                         <th>
                             Status
@@ -49,6 +52,15 @@
                         </td>
                         <td>
                             <?php echo $user->cnpj ?? '-'; ?>
+                        </td>
+                        <td>
+                            <?php
+                                if($user->role == 'accounting') {
+                            ?>
+                            <span class="label label-success">Contabilidade</span>
+                            <?php } else { ?>
+                            <span class="label label-primary">Empresa</span>
+                            <?php } ?>
                         </td>
                         <td>
                             <?php 

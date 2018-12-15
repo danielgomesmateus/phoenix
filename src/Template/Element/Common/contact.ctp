@@ -2,7 +2,7 @@
     <div class="container">
         <div class="col-md-12 col-xs-12">
             <h1 class="title-content text-center">
-            <i class="fa fa-rocket" aria-hidden="true"></i> Entre em contato
+                <i class="fa fa-rocket" aria-hidden="true"></i> Entre em contato
             </h1>
             <div class="col-md-5 col-xs-12 col-sm-12">
                 <form>

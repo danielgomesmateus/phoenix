@@ -31,7 +31,7 @@
         <a href="#">
             <i class="fa fa-building"></i> 
             <span>
-                Empresas/Contabilidades
+                Usuários
             </span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -87,29 +87,6 @@
             </li>
             <li>
                 <a href="<?php echo $this->Url->build(['controller' => 'partners', 'action' => 'index', 'provider']); ?>">
-                    <i class="fa fa-list"></i> Listar
-                </a>
-            </li>
-        </ul>
-    </li>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-diamond"></i> 
-            <span>
-                Lançamentos
-            </span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            <li>
-                <a href="<?php echo $this->Url->build('/'); ?>">
-                    <i class="fa fa-plus"></i> Adicionar
-                </a>
-            </li>
-            <li>
-                <a href="<?php echo $this->Url->build('/'); ?>">
                     <i class="fa fa-list"></i> Listar
                 </a>
             </li>

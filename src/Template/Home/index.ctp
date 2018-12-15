@@ -5,32 +5,32 @@
         <li data-target="#bs-carousel" data-slide-to="1"></li>
     </ol>
     <div class="carousel-inner">
-    <div class="item slides active">
-        <div class="slide-1"></div>
-        <div class="hero">
-        <hgroup>
-            <h1>
-                Somos criativos
-            </h1>
-            <h3>
-                Iremos oferecer soluções práticas, objetivas e que auxilie o seu negócio.
-            </h3>
-        </hgroup>
-        </div>
-    </div>
-    <div class="item slides">
-        <div class="slide-2"></div>
-        <div class="hero">
+        <div class="item slides active">
+            <div class="slide-1"></div>
+            <div class="hero">
             <hgroup>
                 <h1>
-                    Somos especialistas
+                    Somos criativos
                 </h1>
                 <h3>
-                    Iremos utilizar tecnologia de ponta para criar o seu produto ou serviço.
+                    Iremos oferecer soluções práticas, objetivas e que auxilie o seu negócio.
                 </h3>
             </hgroup>
+            </div>
         </div>
-    </div>
+        <div class="item slides">
+            <div class="slide-2"></div>
+            <div class="hero">
+                <hgroup>
+                    <h1>
+                        Somos especialistas
+                    </h1>
+                    <h3>
+                        Iremos utilizar tecnologia de ponta para criar o seu produto ou serviço.
+                    </h3>
+                </hgroup>
+            </div>
+        </div>
     </div>
 </div>
 

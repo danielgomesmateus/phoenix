@@ -36,6 +36,22 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-xs-12" style="margin-bottom:15px;">
+                    <?php
+                        if(!(empty($partner->address)) && !(empty($partner->neighborhood)) && !(empty($partner->city)) && !(empty($partner->state))) {
+
+                            $options = [
+                                'zoom' => 10                             
+                            ];
+                            echo $this->GoogleMap->map($options);
+                
+                            $this->GoogleMap->addMarker(['address' => "{$partner->address}, {$partner->neighborhood}, {$partner->city}, {$partner->state}", 'title' => $partner->social_name, 'icon' => $this->GoogleMap->iconSet('orange')]);
+                            $this->GoogleMap->finalize();
+                        }                   
+                    ?>                    
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-xs-6">
                     <p class="lead">
                         Lançamentos

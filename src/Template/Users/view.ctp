@@ -36,16 +36,32 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-xs-12" style="margin-bottom:15px;">
+                    <?php
+                        if(!(empty($user->address)) && !(empty($user->neighborhood)) && !(empty($user->city)) && !(empty($user->state))) {
+                                                        
+                            $options = [
+                                'zoom' => 10
+                            ];
+                            echo $this->GoogleMap->map($options);
+                
+                            $this->GoogleMap->addMarker(['address' => "{$user->address}, {$user->neighborhood}, {$user->city}, {$user->state}", 'title' => $user->social_name, 'icon' => $this->GoogleMap->iconSet('orange')]);
+                            $this->GoogleMap->finalize();
+                        }                   
+                    ?>                    
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-xs-6">
                     <p class="lead">
-                        Lançamentos
+                        Clientes e fornecedores
                     </p>
                     <div class="table-responsive">
                         <table class="table">
                             <tbody>
                                 <tr>
                                     <th>
-                                        Mês
+                                        Clientes:
                                     </th>
                                     <td>
                                         -
@@ -53,7 +69,7 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        Ano:
+                                        Fornecedores:
                                     </th>
                                     <td>
                                         -

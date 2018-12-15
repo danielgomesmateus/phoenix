@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 class UsersController extends AppController {
 
@@ -63,7 +64,7 @@ class UsersController extends AppController {
 
     public function index() {
         
-        $users = $this->paginate($this->Users, ['limit' => 20]);
+        $users = $this->paginate($this->Users->find('all')->where(['role <>' => 'admin']), ['limit' => 20]);
         $this->set(compact('users'));
     }
 
@@ -72,7 +73,7 @@ class UsersController extends AppController {
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
-        $this->set('user', $user);
+        $this->set(compact('user'));
     }
 
     public function login() {
