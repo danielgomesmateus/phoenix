@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
- * @property \App\Model\Table\ClientsTable|\Cake\ORM\Association\HasMany $Clients
+ * @property \App\Model\Table\PartnersTable|\Cake\ORM\Association\HasMany $Partners
  * @property \App\Model\Table\PhonesTable|\Cake\ORM\Association\HasMany $Phones
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
@@ -42,7 +42,7 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('Clients', [
+        $this->hasMany('Partners', [
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Images', [

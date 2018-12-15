@@ -28,7 +28,7 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property string $role
  * @property int $status
  *
- * @property \App\Model\Entity\Client[] $clients
+ * @property \App\Model\Entity\Client[] $partners
  * @property \App\Model\Entity\Phone[] $phones
  */
 class User extends Entity
@@ -62,7 +62,7 @@ class User extends Entity
         'modified' => true,
         'role' => true,
         'status' => true,
-        'clients' => true,
+        'partners' => true,
         'phones' => true,
         'images' => true
     ];

@@ -47,10 +47,10 @@
                         <?php echo $this->Form->control('state', ['label' => 'Estado:', 'class' => 'form-control', 'id' => 'state', 'required' => 'required', 'maxlength' => 2]); ?>
                     </div>
                     <div class="form-group">
-                        <?php echo $this->Form->control('municipal_registration', ['label' => 'Registro municipal:', 'class' => 'form-control', 'id' => 'municipal_registration', 'maxlength' => 25]); ?>
+                        <?php echo $this->Form->control('municipal_registration', ['label' => 'Inscrição municipal:', 'class' => 'form-control', 'id' => 'municipal_registration', 'maxlength' => 25]); ?>
                     </div>
                     <div class="form-group">
-                        <?php echo $this->Form->control('state_registration', ['label' => 'Registro estadual:', 'class' => 'form-control', 'id' => 'state_registration', 'maxlength' => 25]); ?>
+                        <?php echo $this->Form->control('state_registration', ['label' => 'Inscrição estadual:', 'class' => 'form-control', 'id' => 'state_registration', 'maxlength' => 25]); ?>
                     </div>
                     <div class="form-group">
                         <?php echo $this->Form->control('phones.0.landline', ['label' => 'Telefone fixo:', 'class' => 'form-control', 'id' => 'landline', 'maxlength' => 14]); ?>

@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\ClientsTable;
+use App\Model\Table\PartnersTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\ClientsTable Test Case
+ * App\Model\Table\PartnersTable Test Case
  */
-class ClientsTableTest extends TestCase
+class PartnersTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\ClientsTable
+     * @var \App\Model\Table\PartnersTable
      */
-    public $Clients;
+    public $Partners;
 
     /**
      * Fixtures
@@ -24,7 +24,7 @@ class ClientsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.Clients',
+        'app.Partners',
         'app.Users'
     ];
 
@@ -36,8 +36,8 @@ class ClientsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::getTableLocator()->exists('Clients') ? [] : ['className' => ClientsTable::class];
-        $this->Clients = TableRegistry::getTableLocator()->get('Clients', $config);
+        $config = TableRegistry::getTableLocator()->exists('Partners') ? [] : ['className' => PartnersTable::class];
+        $this->Partners = TableRegistry::getTableLocator()->get('Partners', $config);
     }
 
     /**
@@ -47,7 +47,7 @@ class ClientsTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Clients);
+        unset($this->Partners);
 
         parent::tearDown();
     }

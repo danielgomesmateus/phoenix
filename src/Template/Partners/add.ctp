@@ -2,10 +2,10 @@
     <div class="box box-danger" style="margin-top:15px;">
         <div class="box-header with-border">
             <h3 class="box-title">
-                Cadastrar novo cliente
+                Cadastrar novo <?php echo $option == 'client' ? "cliente" : 'fornecedor'; ?>
             </h3>
         </div>
-        <?php echo $this->Form->create($client); ?>
+        <?php echo $this->Form->create($partner); ?>
             <div class="box-body">
                 <div class="col-md-6 col-xs-12 col-sm-12">
                     <div class="form-group">

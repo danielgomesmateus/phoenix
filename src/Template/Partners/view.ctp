@@ -2,36 +2,36 @@
     <div class="box box-danger" style="margin-top:15px;">
         <div class="box-header with-border">
             <h3 class="box-title">
-                <i class="fa fa-globe"></i> <?php echo $client->name; ?> - (<?php echo $client->social_name; ?>)
+                <i class="fa fa-globe"></i> <?php echo $partner->name; ?> - (<?php echo $partner->social_name; ?>)
             </h3>
             <div class="pull-right">
-                Data de cadastro: <?php echo date("d/m/Y H:i:s", strtotime($client->created)); ?>
+                Data de cadastro: <?php echo date("d/m/Y H:i:s", strtotime($partner->created)); ?>
             </div>
         </div>
         <div class="box-body">
             <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
                     <address>
-                        <strong><?php echo $client->social_name; ?></strong><br>
-                        <?php echo $client->address; ?><br>
-                        <?php echo $client->state; ?>, <?php echo $client->city; ?>, <?php echo $client->neighborhood; ?>, nº <?php echo $client->number; ?><br>
+                        <strong><?php echo $partner->social_name; ?></strong><br>
+                        <?php echo $partner->address; ?><br>
+                        <?php echo $partner->state; ?>, <?php echo $partner->city; ?>, <?php echo $partner->neighborhood; ?>, nº <?php echo $partner->number; ?><br>
                         <br>
                     </address>
                 </div>
                 <div class="col-sm-4 invoice-col">
                     <b>
-                        Identificador: #<?php echo $client->id; ?>
+                        Identificador: #<?php echo $partner->id; ?>
                     </b>
                     <br />
                     <b>
                         CNPJ:
                     </b> 
-                    <?php echo $client->cnpj; ?>
+                    <?php echo $partner->cnpj; ?>
                     <br />
                     <b>
                         Telefone:
                     </b> 
-                    <?php echo $client->phone; ?>
+                    <?php echo $partner->phone; ?>
                     <br />
                 </div>
             </div>
@@ -75,8 +75,8 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="pull-right">
-                        <?php echo $this->Html->link('<i class="fa fa-pencil"></i> Editar cliente', ['controller' => 'clients', 'action' => 'edit', $client->id], ['class' => 'btn btn-warning', 'escape' => false]); ?>
-                        <?php echo $this->Form->postLink('<i class="fa fa-trash"></i> Apagar cliente', ['controller' => 'clients', 'action' => 'delete', $client->id], ['class' => 'btn btn-danger', 'escape' => false, 'confirm' => 'Deseja realmente apagar este cliente?']); ?>
+                        <?php echo $this->Html->link('<i class="fa fa-pencil"></i> Editar cliente', ['controller' => 'partners', 'action' => 'edit', $partner->id], ['class' => 'btn btn-warning', 'escape' => false]); ?>
+                        <?php echo $this->Form->postLink('<i class="fa fa-trash"></i> Apagar cliente', ['controller' => 'partners', 'action' => 'delete', $partner->id], ['class' => 'btn btn-danger', 'escape' => false, 'confirm' => 'Deseja realmente apagar este cliente?']); ?>
                     </div>
                 </div>
             </div>

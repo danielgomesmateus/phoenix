@@ -7,22 +7,22 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Clients Model
+ * Partners Model
  *
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  *
- * @method \App\Model\Entity\Client get($primaryKey, $options = [])
- * @method \App\Model\Entity\Client newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Client[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Client|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Client|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Client patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Client[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Client findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Partner get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Partner newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Partner[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Partner|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Partner|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Partner patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Partner[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Partner findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class ClientsTable extends Table
+class PartnersTable extends Table
 {
 
     /**
@@ -35,7 +35,7 @@ class ClientsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('clients');
+        $this->setTable('partners');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
@@ -112,6 +112,12 @@ class ClientsTable extends Table
             ->scalar('state')
             ->maxLength('state', 2)
             ->allowEmpty('state');
+
+        $validator
+            ->scalar('role')
+            ->maxLength('role', 10)
+            ->requirePresence('role', 'create')
+            ->notEmpty('role');
 
         $validator
             ->integer('status')

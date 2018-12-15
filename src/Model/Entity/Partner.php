@@ -4,7 +4,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Client Entity
+ * Partner Entity
  *
  * @property int $id
  * @property int $user_id
@@ -20,11 +20,12 @@ use Cake\ORM\Entity;
  * @property string|null $state
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ * @property string $role
  * @property int $status
  *
  * @property \App\Model\Entity\User $user
  */
-class Client extends Entity
+class Partner extends Entity
 {
 
     /**
@@ -50,6 +51,7 @@ class Client extends Entity
         'state' => true,
         'created' => true,
         'modified' => true,
+        'role' => true,
         'status' => true,
         'user' => true
     ];

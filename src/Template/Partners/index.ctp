@@ -2,7 +2,7 @@
     <div class="box box-danger" style="margin-top:15px;">
         <div class="box-header">
             <h3 class="box-title">
-                Clientes
+                <?php echo $option == 'client' ? "Clientes" : 'Fornecedores'; ?>
             </h3>
         </div>
         <div class="box-body table-responsive no-padding">
@@ -29,24 +29,24 @@
                         </th>
                     </tr>
                     <?php
-                        foreach($clients as $client) {
+                        foreach($partners as $partner) {
                     ?>
                     <tr>
                         <td>
-                            <?php echo $client->name; ?>
+                            <?php echo $partner->name; ?>
                         </td>
                         <td>
-                            <?php echo $client->phone; ?>
+                            <?php echo $partner->phone; ?>
                         </td>
                         <td>
-                            <?php echo $client->social_name; ?>
+                            <?php echo $partner->social_name; ?>
                         </td>
                         <td>
-                            <?php echo $client->cnpj; ?>
+                            <?php echo $partner->cnpj; ?>
                         </td>
                         <td>
                             <?php 
-                                if($client->status == 1) { 
+                                if($partner->status == 1) { 
                             ?>
                             <span class="label label-success">Ativado</span>
                             <?php } else { ?>
@@ -56,12 +56,12 @@
                         <td>
                             <div>
                                 <?php
-                                    echo $this->Html->link('<i class="fa fa-search" aria-hidden="true"></i> Visualizar cliente', ['controller' => 'clients', 'action' => 'view', $client->id], ['alt' => 'Visualizar cliente', 'title' => 'Visualizar cliente', 'escape' => false, 'class' => 'label label-primary label-block']);
+                                    echo $this->Html->link('<i class="fa fa-search" aria-hidden="true"></i> Visualizar', ['controller' => 'partners', 'action' => 'view', $partner->id], ['alt' => 'Visualizar', 'title' => 'Visualizar', 'escape' => false, 'class' => 'label label-primary label-block']);
                                 ?>
                             </div>
                             <div>
                                 <?php    
-                                    echo $this->Form->postLink('<i class="fa fa-exchange" aria-hidden="true"></i> Alterar status', ['controller' => 'clients', 'action' => 'alterStatus', $client->id], ['escape' => false, 'confirm' => 'Deseja realmente alterar o status deste cliente?', 'class' => 'label label-warning label-block']);
+                                    echo $this->Form->postLink('<i class="fa fa-exchange" aria-hidden="true"></i> Alterar status', ['controller' => 'partners', 'action' => 'alterStatus', $partner->id], ['escape' => false, 'confirm' => 'Deseja realmente alterar o status deste cliente?', 'class' => 'label label-warning label-block']);
                                 ?>
                             </div>
                         </td>

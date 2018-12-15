@@ -5,7 +5,7 @@
                 Editar cliente
             </h3>
         </div>
-        <?php echo $this->Form->create($client); ?>
+        <?php echo $this->Form->create($partner); ?>
             <div class="box-body">
                 <div class="col-md-6 col-xs-12 col-sm-12">
                     <div class="form-group">
