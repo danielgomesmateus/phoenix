@@ -1,32 +1,30 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Banner $banner
- */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $banner->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $banner->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Banners'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="banners form large-9 medium-8 columns content">
-    <?= $this->Form->create($banner) ?>
-    <fieldset>
-        <legend><?= __('Edit Banner') ?></legend>
-        <?php
-            echo $this->Form->control('image');
-            echo $this->Form->control('title');
-            echo $this->Form->control('description');
-            echo $this->Form->control('status');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<div class="container-fluid">
+    <div class="box box-primary" style="margin-top:15px;">
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                Adicionar imagem ao slide
+            </h3>
+        </div>
+        <?php echo $this->Form->create($banner, ['type' => 'file']); ?>
+            <div class="box-body">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    <div class="form-group">
+                        <?php echo $this->Form->control('title', ['label' => 'Título:', 'class' => 'form-control', 'id' => 'title', 'required' => 'required', 'maxlength' => 50]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('description', ['label' => 'Descrição:', 'class' => 'form-control', 'id' => 'description', 'required' => 'required', 'maxlength' => 150]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('image', ['label' => 'Imagem:', 'id' => 'image', 'required' => 'required', 'type' => 'file']); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('id', ['type' => 'hidden']); ?>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        <?php echo $this->Form->end(); ?>
+    </div>
 </div>

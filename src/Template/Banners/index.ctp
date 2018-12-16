@@ -1,57 +1,76 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Banner[]|\Cake\Collection\CollectionInterface $banners
- */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Banner'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="banners index large-9 medium-8 columns content">
-    <h3><?= __('Banners') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('image') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('title') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('description') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('status') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($banners as $banner): ?>
-            <tr>
-                <td><?= $this->Number->format($banner->id) ?></td>
-                <td><?= h($banner->image) ?></td>
-                <td><?= h($banner->title) ?></td>
-                <td><?= h($banner->description) ?></td>
-                <td><?= h($banner->created) ?></td>
-                <td><?= h($banner->modified) ?></td>
-                <td><?= $this->Number->format($banner->status) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $banner->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $banner->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $banner->id], ['confirm' => __('Are you sure you want to delete # {0}?', $banner->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+<div class="col-xs-12">
+    <div class="box box-primary" style="margin-top:15px;">
+        <div class="box-header">
+            <h3 class="box-title">
+                Slide
+            </h3>
+        </div>
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>
+                            Título
+                        </th>
+                        <th>
+                            Descrição
+                        </th>
+                        <th>
+                            Imagem
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Ações
+                        </th>
+                    </tr>
+                    <?php
+                        foreach($banners as $banner) {
+                    ?>
+                    <tr>
+                        <td>
+                            <?php echo $banner->title; ?>
+                        </td>
+                        <td>
+                            <?php echo $banner->description; ?>
+                        </td>
+                        <td>
+                            <?php echo $banner->image; ?>
+                        </td>
+                        <td>
+                            <?php 
+                                if($banner->status == 1) { 
+                            ?>
+                            <span class="label label-success">Ativado</span>
+                            <?php } else { ?>
+                            <span class="label label-danger">Desativado</span>
+                            <?php } ?>
+                        </td>
+                        <td>
+                            <div>
+                                <?php
+                                    echo $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i> Editar imagem', ['controller' => 'banners', 'action' => 'edit', $banner->id], ['alt' => 'Editar imagem', 'title' => 'Editar imagem', 'escape' => false, 'class' => 'label label-primary label-block']);
+                                ?>
+                            </div>
+                            <div>
+                                <?php    
+                                    echo $this->Form->postLink('<i class="fa fa-exchange" aria-hidden="true"></i> Alterar status', ['controller' => 'banners', 'action' => 'alterStatus', $banner->id], ['escape' => false, 'confirm' => 'Deseja realmente alterar esta imagem?', 'class' => 'label label-warning label-block']);
+                                ?>
+                            </div>
+                            <div>
+                                <?php    
+                                    echo $this->Form->postLink('<i class="fa fa-trash" aria-hidden="true"></i> Apagar imagem', ['controller' => 'banners', 'action' => 'delete', $banner->id], ['escape' => false, 'confirm' => 'Deseja realmente apagar esta imagem?', 'class' => 'label label-danger label-block']);
+                                ?>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+    <ul class="pagination pagination-sm no-margin pull-right">
+        <?php echo $this->Paginator->numbers(); ?>
+    </ul>
 </div>

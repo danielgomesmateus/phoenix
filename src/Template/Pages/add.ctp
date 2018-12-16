@@ -2,7 +2,7 @@
     <div class="box box-primary" style="margin-top:15px;">
         <div class="box-header with-border">
             <h3 class="box-title">
-                Adiciona página
+                Adicionar página
             </h3>
         </div>
         <?php echo $this->Form->create($page); ?>

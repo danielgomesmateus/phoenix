@@ -30,7 +30,7 @@
                         <?php echo $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i> Editar', ['controller' => 'users', 'action' => 'edit'], ['class' => 'btn btn-warning', 'escape' => false]); ?>
                         </div>
                         <div class="pull-right">
-                            <?php echo $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i> Sair', ['controller' => 'users', 'action' => 'login'], ['class' => 'btn btn-danger', 'escape' => false]); ?>
+                            <?php echo $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i> Sair', ['controller' => 'users', 'action' => 'logout'], ['class' => 'btn btn-danger', 'escape' => false]); ?>
                         </div>
                     </li>
                 </ul>
