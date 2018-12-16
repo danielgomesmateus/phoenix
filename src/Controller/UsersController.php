@@ -198,11 +198,11 @@ class UsersController extends AppController {
         
         if ($this->Users->delete($user)) {
             
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('Página apagada com sucesso!'));
         } 
         else {
             
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Erro ao apagar conta de usuário! Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -229,7 +229,7 @@ class UsersController extends AppController {
                        ->where(['id' => $id])
                        ->execute();
                 
-                $this->Flash->success(__('Empresa/Contabilidade atualizado com sucesso!'));
+                $this->Flash->success(__('Empresa/Contabilidade atualizada com sucesso!'));
             }
             
             return $this->redirect(['controller' => 'users']);

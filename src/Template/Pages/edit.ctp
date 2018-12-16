@@ -1,33 +1,27 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Page $page
- */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $page->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $page->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Pages'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="pages form large-9 medium-8 columns content">
-    <?= $this->Form->create($page) ?>
-    <fieldset>
-        <legend><?= __('Edit Page') ?></legend>
-        <?php
-            echo $this->Form->control('title');
-            echo $this->Form->control('resume');
-            echo $this->Form->control('content');
-            echo $this->Form->control('url_rewrite');
-            echo $this->Form->control('status');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<div class="container-fluid">
+    <div class="box box-primary" style="margin-top:15px;">
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                Adiciona página
+            </h3>
+        </div>
+        <?php echo $this->Form->create($page); ?>
+            <div class="box-body">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    <div class="form-group">
+                        <?php echo $this->Form->control('title', ['label' => 'Título:', 'class' => 'form-control', 'id' => 'title', 'required' => 'required', 'maxlength' => 30]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->control('resume', ['label' => 'Resumo:', 'class' => 'form-control', 'id' => 'resume', 'required' => 'required', 'maxlength' => 150]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Ck->input('content', ['label' => 'Conteúdo:', 'class' => 'form-control', 'id' => 'content', 'required' => 'required']); ?>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        <?php echo $this->Form->end(); ?>
+    </div>
 </div>

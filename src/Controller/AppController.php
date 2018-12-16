@@ -60,6 +60,9 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
 
+        $pages = TableRegistry::get('Pages')->find()->select(['title', 'slug'])->where(['status' => 1])->toArray();
+        $this->set('pages', $pages);
+
         if($this->Auth->user()) {
 
             $images = TableRegistry::get('Images');

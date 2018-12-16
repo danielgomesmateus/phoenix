@@ -12,8 +12,8 @@
         <?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Open+Sans'); ?>
     </head>
     <body>
-        <?php echo $this->Flash->render(); ?>
         <?php echo $this->Element('Common/navbar'); ?>
+        <?php echo $this->Flash->render(); ?>
         <?php echo $this->fetch('content'); ?>
         <?php echo $this->Element('Common/contact'); ?>
         <?php echo $this->Element('Common/footer'); ?>

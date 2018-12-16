@@ -70,10 +70,11 @@ class PagesTable extends Table
             ->notEmpty('content');
 
         $validator
-            ->scalar('url_rewrite')
-            ->maxLength('url_rewrite', 35)
-            ->requirePresence('url_rewrite', 'create')
-            ->notEmpty('url_rewrite');
+            ->scalar('slug')
+            ->maxLength('slug', 50)
+            ->requirePresence('slug', 'create')
+            ->notEmpty('slug')
+            ->add('slug', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->integer('status')
@@ -81,5 +82,19 @@ class PagesTable extends Table
             ->notEmpty('status');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['slug']));
+
+        return $rules;
     }
 }

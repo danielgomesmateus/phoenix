@@ -37,6 +37,7 @@ class Application extends BaseApplication
         $this->addPlugin('Recaptcha', ['bootstrap' => true, 'routes' => true]);
         $this->addPlugin('AdminLTE', ['bootstrap' => true, 'routes' => true]);
         $this->addPlugin('Geo');
+        $this->addPlugin('CkEditor');
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();

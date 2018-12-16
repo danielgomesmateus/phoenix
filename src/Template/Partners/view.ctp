@@ -88,6 +88,9 @@
                     </div>
                 </div>
             </div>
+            <?php 
+                if($userData['role'] == 'company') {
+            ?>
             <div class="row">
                 <div class="col-xs-12">
                     <div class="pull-right">
@@ -96,6 +99,7 @@
                     </div>
                 </div>
             </div>
+            <?php } ?>
         </div>
     </div>
 </div>

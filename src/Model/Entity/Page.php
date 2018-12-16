@@ -10,7 +10,7 @@ use Cake\ORM\Entity;
  * @property string $title
  * @property string $resume
  * @property string $content
- * @property string $url_rewrite
+ * @property string $slug
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  * @property int $status
@@ -31,7 +31,7 @@ class Page extends Entity
         'title' => true,
         'resume' => true,
         'content' => true,
-        'url_rewrite' => true,
+        'slug' => true,
         'created' => true,
         'modified' => true,
         'status' => true

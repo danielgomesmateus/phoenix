@@ -40,5 +40,6 @@ class AppView extends View {
             'language' => 'pt-BR'
         ];
         $this->loadHelper('Geo.GoogleMap', $config);
+        $this->loadHelper('CkEditor.Ck');
     }
 }

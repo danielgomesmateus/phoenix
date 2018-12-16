@@ -35,51 +35,19 @@
       <div class="col-md-3 col-sm-6">
         <div class="footer-info-single">
         	<h2 class="title">
-            Ajuda
+            Saiba mais
           </h2>
         	<ul class="list-unstyled">
-        		<li>
-              <a href="pages.html" title=""><i class="fa fa-angle-double-right"></i>
-                Como funciona
+            <?php
+              foreach($pages as $page) {
+            ?>
+            <li>
+              <a href="<?php echo $this->Url->build(['controller' => 'pages', 'action' => 'view', $page['slug']]); ?>">
+                <?php echo $page['title']; ?>
               </a>
             </li>
-        		<li>
-              <a href="pages.html" title=""><i class="fa fa-angle-double-right"></i>
-                 FAQ's
-               </a>
-            </li>
-        		<li>
-              <a href="pages.html" title="">
-                <i class="fa fa-angle-double-right"></i>
-                Sitemap
-              </a>
-            </li>
+            <?php } ?>
         	</ul>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <div class="footer-info-single">
-          	<h2 class="title">
-              Segurança e privacidade
-            </h2>
-          	<ul class="list-unstyled">
-          		<li>
-                <a href="pages.html" title="">
-                  <i class="fa fa-angle-double-right"></i>
-                  Termos de uso
-                </a>
-              </li>
-          		<li>
-                <a href="pages.html" title=""><i class="fa fa-angle-double-right"></i>
-                  Políticas de privacidade
-                </a>
-              </li>
-          		<li>
-                <a href="pages.html" title=""><i class="fa fa-angle-double-right"></i>
-                  Segurança da informação
-                </a>
-              </li>
-          	</ul>
           </div>
         </div>
         <div class="col-md-6 col-sm-6">

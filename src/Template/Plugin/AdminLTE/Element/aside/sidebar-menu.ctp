@@ -107,12 +107,12 @@
         </a>
         <ul class="treeview-menu">
             <li>
-                <a href="<?php echo $this->Url->build('/'); ?>">
+                <a href="<?php echo $this->Url->build(['controller' => 'pages', 'action' => 'add']); ?>">
                     <i class="fa fa-plus"></i> Adicionar
                 </a>
             </li>
             <li>
-                <a href="<?php echo $this->Url->build('/'); ?>">
+                <a href="<?php echo $this->Url->build(['controller' => 'pages']); ?>">
                     <i class="fa fa-list"></i> Listar
                 </a>
             </li>

@@ -29,11 +29,39 @@
             </div>
             <div class="col-sm-4 text-right hidden-xs">
                 <ul class="tools">
-                    <li class="dropdown">
+                    <?php
+                        if(!(isset($userData))) {
+                    ?>
+                    <li>
                         <a class="" href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'register']); ?>">
-                            <i class="fa fa-user" aria-hidden="true"></i> Minha conta
+                            <i class="fa fa-sign-in" aria-hidden="true"></i> Criar conta
                         </a>
                     </li>
+                    <li>
+                        <a class="" href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'login']); ?>">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i> Acessar conta
+                        </a>
+                    </li>
+                    <?php } else { ?>
+                    <li>
+                        <?php
+                            if($userData['role'] == 'admin') {
+                        ?>
+                        <a class="" href="<?php echo $this->Url->build(['controller' => 'users']); ?>">
+                            <i class="fa fa-cog" aria-hidden="true"></i> Gerenciar
+                        </a>
+                        <?php } else { ?>
+                            <a class="" href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'edit']); ?>">
+                            <i class="fa fa-cog" aria-hidden="true"></i> Gerenciar
+                        </a>
+                        <?php } ?>
+                    </li>
+                    <li>
+                        <a class="" href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'logout']); ?>">
+                            <i class="fa fa-unlock" aria-hidden="true"></i> Sair
+                        </a>
+                    </li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
@@ -43,9 +71,9 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="<?php echo $this->Url->build(['controller' => 'home']); ?>">
                 <!-- Aqui vêm a logo -->
@@ -55,12 +83,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="<?php echo $this->Url->build(['controller' => 'home']); ?>">
-                        Página inicial
-                    </a>
-                </li>
-                <li>
-                    <a href="<?php echo $this->Url->build(['controller' => 'pages', 'action' => 'display']); ?>">
-                        Serviços
+                        <i class="fa fa-home" aria-hidden="true"></i> Página inicial
                     </a>
                 </li>
             </ul>
