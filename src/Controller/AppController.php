@@ -61,11 +61,14 @@ class AppController extends Controller
         $this->loadComponent('Flash');
 
         $pages = TableRegistry::get('Pages')->find()->select(['title', 'slug'])->where(['status' => 1])->toArray();
-        $this->set('pages', $pages);
+        $this->set(compact('pages'));
 
         $blocks = TableRegistry::get('Blocks')->find()->select(['title', 'content'])->where(['status' => 1])->toArray();
-        $this->set('blocks', $blocks);    
+        $this->set(compact('blocks'));    
         
+        $banners = TableRegistry::get('Banners')->find()->select(['image', 'title', 'description'])->where(['status' => 1])->toArray();
+        $this->set(compact('banners'));
+
         if($this->Auth->user()) {
 
             $images = TableRegistry::get('Images');

@@ -15,7 +15,7 @@
                         <?php echo $this->Form->control('description', ['label' => 'Descrição:', 'class' => 'form-control', 'id' => 'description', 'required' => 'required', 'maxlength' => 150]); ?>
                     </div>
                     <div class="form-group">
-                        <?php echo $this->Form->control('image', ['label' => 'Imagem:', 'id' => 'image', 'required' => 'required', 'type' => 'file']); ?>
+                        <?php echo $this->Form->control('image', ['label' => 'Imagem:', 'id' => 'image', 'required' => false, 'type' => 'file']); ?>
                     </div>
                     <div class="form-group">
                         <?php echo $this->Form->control('id', ['type' => 'hidden']); ?>

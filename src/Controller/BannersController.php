@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 class BannersController extends AppController {
 
@@ -70,11 +71,11 @@ class BannersController extends AppController {
             
             if($this->Banners->save($banner)) {
                 
-                $this->Flash->success(__('The banner has been saved.'));
+                $this->Flash->success(__('Banner salvo com sucesso!'));
                 return $this->redirect(['action' => 'index']);
             }
 
-            $this->Flash->error(__('The banner could not be saved. Please, try again.'));
+            $this->Flash->error(__('Erro ao salvar banner! Tente novamente.'));
         }
 
         $this->set(compact('banner'));
@@ -88,15 +89,37 @@ class BannersController extends AppController {
 
         if($this->request->is(['patch', 'post', 'put'])) {
             
-            $banner = $this->Banners->patchEntity($banner, $this->request->getData());
+            if(!(empty($this->request->getData()['image']['tmp_name']))) {
+                
+                $config = [
+                    'dir'   => 'banners',
+                    'type'  => 'slide'
+                ];
+                
+                $data = $this->UploadImage->Banners($this->request->getData(), $config);
+    
+                if(!($data)) {
+    
+                    $this->Flash->error(__('Verifique o formato e tamanho da imagem!'));
+                    return $this->redirect(['action' => 'edit']); 
+                }
+            }
+            else {
+
+                $data = $this->request->getData();
+                unset($data['image']);
+                $data['image'] = $banner['image'];
+            }
+
+            $banner = $this->Banners->patchEntity($banner, $data);
             
             if($this->Banners->save($banner)) {
                 
-                $this->Flash->success(__('The banner has been saved.'));
+                $this->Flash->success(__('Banner atualizado com sucesso!'));
                 return $this->redirect(['action' => 'index']);
             }
 
-            $this->Flash->error(__('The banner could not be saved. Please, try again.'));
+            $this->Flash->error(__('Erro ao atualizar banner! Tente novamente.'));
         }
 
         $this->set(compact('banner'));
@@ -109,13 +132,41 @@ class BannersController extends AppController {
         
         if($this->Banners->delete($banner)) {
             
-            $this->Flash->success(__('The banner has been deleted.'));
+            $this->Flash->success(__('Banner apagado com sucesso!'));
         } 
         else {
             
-            $this->Flash->error(__('The banner could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Erro ao apagar banner! Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function alterStatus($id = null) {
+
+        if($this->request->is(['post', 'put'])) {
+            
+            if($id == null) {
+
+                $this->Flash->error(__('Banner não encontrado!'));
+            }
+            else {
+
+                $banners = TableRegistry::get('Banners');
+                $banner  = $banners->get($id);
+
+                $status = $banner->status == 1 ? 0 : 1;
+
+                $banners->query()
+                       ->update()
+                       ->set(['status' => $status])
+                       ->where(['id' => $id])
+                       ->execute();
+                
+                $this->Flash->success(__('Banner atualizado com sucesso!'));
+            }
+            
+            return $this->redirect(['controller' => 'banners']);
+        }
     }
 }

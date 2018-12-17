@@ -16,9 +16,6 @@
                             Descrição
                         </th>
                         <th>
-                            Imagem
-                        </th>
-                        <th>
                             Status
                         </th>
                         <th>
@@ -34,9 +31,6 @@
                         </td>
                         <td>
                             <?php echo $banner->description; ?>
-                        </td>
-                        <td>
-                            <?php echo $banner->image; ?>
                         </td>
                         <td>
                             <?php 
