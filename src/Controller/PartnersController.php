@@ -69,8 +69,8 @@ class PartnersController extends AppController {
         $partner = $this->Partners->get($id, [
             'contain' => ['Users']
         ]);
-
-        $this->set('partner', $partner);
+        
+        $this->set(compact('partner'));
     }
 
     public function add($option = null) {

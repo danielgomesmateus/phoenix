@@ -15,7 +15,7 @@
                         <?php echo $this->Form->control('resume', ['label' => 'Resumo:', 'class' => 'form-control', 'id' => 'resume', 'required' => 'required', 'maxlength' => 150]); ?>
                     </div>
                     <div class="form-group">
-                        <?php echo $this->Ck->input('content', ['label' => 'Conteúdo:', 'class' => 'form-control', 'id' => 'content', 'required' => 'required']); ?>
+                        <?php echo $this->Ck->input('content', ['label' => 'Conteúdo:', 'class' => 'form-control', 'id' => 'content', 'required' => 'required', ['allowedContent' => 'true']]); ?>
                     </div>
                 </div>
             </div>

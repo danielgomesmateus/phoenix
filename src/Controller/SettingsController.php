@@ -1,75 +1,45 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
-/**
- * Settings Controller
- *
- * @property \App\Model\Table\SettingsTable $Settings
- *
- * @method \App\Model\Entity\Setting[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
-class SettingsController extends AppController
-{
+class SettingsController extends AppController {
+    
+    public function initialize() {
 
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
-     */
-    public function index()
-    {
-        $settings = $this->paginate($this->Settings);
-
-        $this->set(compact('settings'));
+        parent::initialize();
+        
+        $this->loadComponent('UploadImage');
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Setting id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $setting = $this->Settings->get($id, [
-            'contain' => []
-        ]);
+    public function isAuthorized($user = null) {
 
-        $this->set('setting', $setting);
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $setting = $this->Settings->newEntity();
-        if ($this->request->is('post')) {
-            $setting = $this->Settings->patchEntity($setting, $this->request->getData());
-            if ($this->Settings->save($setting)) {
-                $this->Flash->success(__('The setting has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The setting could not be saved. Please, try again.'));
+        if($user['role'] == 'admin') {
+            
+            return true;
         }
-        $this->set(compact('setting'));
+
+        return false;
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Setting id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
+    public function beforeRender(Event $event) {
+
+        $actions = [
+            'index'
+        ];
+
+        if(in_array($this->request->action, $actions)) {
+
+            $this->viewBuilder()->theme('AdminLTE');
+            $this->viewBuilder()->setClassName('AdminLTE.AdminLTE');
+        }
+    }
+
+    public function index($id = null) {
+
         $setting = $this->Settings->get($id, [
             'contain' => []
         ]);
@@ -83,25 +53,5 @@ class SettingsController extends AppController
             $this->Flash->error(__('The setting could not be saved. Please, try again.'));
         }
         $this->set(compact('setting'));
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Setting id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $setting = $this->Settings->get($id);
-        if ($this->Settings->delete($setting)) {
-            $this->Flash->success(__('The setting has been deleted.'));
-        } else {
-            $this->Flash->error(__('The setting could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
     }
 }

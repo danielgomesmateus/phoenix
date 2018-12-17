@@ -2,27 +2,30 @@
     <div class="box box-primary" style="margin-top:15px;">
         <div class="box-header with-border">
             <h3 class="box-title">
-                <i class="fa fa-globe"></i> <?php echo $partner->name; ?> - (<?php echo $partner->social_name; ?>)
+                <i class="fa fa-globe"></i> <?php echo $partner->name; ?> - (<?php echo "<b>{$partner->social_name}</b>"; ?>)
             </h3>
             <div class="pull-right">
-                Data de cadastro: <?php echo date("d/m/Y H:i:s", strtotime($partner->created)); ?>
+                Data de cadastro: <?php echo date("d/m/Y H:i", strtotime($partner->created)); ?>
             </div>
         </div>
         <div class="box-body">
             <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
                     <address>
-                        <strong><?php echo $partner->social_name; ?></strong><br>
+                        <b>
+                            Identificador: #<?php echo $partner->id; ?>
+                        </b>
+                        <br />
+                        <b>
+                            Endereço:
+                        </b>
+                        <br />
                         <?php echo $partner->address; ?><br>
                         <?php echo $partner->state; ?>, <?php echo $partner->city; ?>, <?php echo $partner->neighborhood; ?>, nº <?php echo $partner->number; ?><br>
                         <br>
                     </address>
                 </div>
                 <div class="col-sm-4 invoice-col">
-                    <b>
-                        Identificador: #<?php echo $partner->id; ?>
-                    </b>
-                    <br />
                     <b>
                         CNPJ:
                     </b> 
@@ -52,9 +55,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <p class="lead">
-                        Lançamentos
+                        <b>
+                            Lançamentos
+                        </b>
                     </p>
                     <div class="table-responsive">
                         <table class="table">
@@ -86,6 +91,9 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <!-- Aqui será mostrado o gráfico com informações de lançamentos -->
                 </div>
             </div>
             <?php 

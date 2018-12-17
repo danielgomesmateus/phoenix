@@ -164,5 +164,16 @@
             </li>
         </ul>
     </li>
+    <li class="treeview">
+        <a href="<?php echo $this->Url->build(['controller' => 'settings']); ?>">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            <span>
+                Configurações gerais
+            </span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+    </li>
     <?php } ?>
 </ul>

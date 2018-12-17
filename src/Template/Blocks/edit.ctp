@@ -12,7 +12,7 @@
                         <?php echo $this->Form->control('title', ['label' => 'Título:', 'class' => 'form-control', 'id' => 'title', 'required' => 'required', 'maxlength' => 50]); ?>
                     </div>
                     <div class="form-group">
-                        <?php echo $this->Ck->input('content', ['label' => 'Conteúdo:', 'class' => 'form-control', 'id' => 'content', 'required' => 'required'], ['allowedContent' => 'true']); ?>
+                        <?php echo $this->Ck->input('content', ['label' => 'Conteúdo:', 'class' => 'form-control', 'id' => 'content', 'required' => 'required'], ['allowedContent' => 'true', 'disallowedContent' => 'true']); ?>
                     </div>
                 </div>
             </div>

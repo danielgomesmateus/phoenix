@@ -71,9 +71,23 @@ class UsersController extends AppController {
     public function view($id = null) {
         
         $user = $this->Users->get($id, [
-            'contain' => []
+            'contain' => [
+                'Images' => function($q) {
+
+                    return $q->select(['user_id', 'image'])->where(['type' => 'profile', 'status' => 1]);
+                }, 
+                'Phones' => function($q) {
+                    
+                    return $q->select(['user_id', 'landline', 'cell_phone']);
+                }
+            ]
         ]);
-        $this->set(compact('user'));
+
+        $clients   = TableRegistry::get('Partners')->find()->where(['user_id' => $id, 'status' => 1, 'role' => 'client'])->count();
+        $providers = TableRegistry::get('Partners')->find()->where(['user_id' => $id, 'status' => 1, 'role' => 'provider'])->count();
+        $partners  = TableRegistry::get('Partners')->find()->where(['user_id' => $id, 'status' => 1])->count();
+
+        $this->set(compact('user', 'clients', 'providers', 'partners'));
     }
 
     public function login() {
