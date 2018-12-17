@@ -51,8 +51,21 @@ class BannersController extends AppController {
         $banner = $this->Banners->newEntity();
         
         if($this->request->is('post')) {
+
+            $config = [
+                'dir'   => 'banners',
+                'type'  => 'slide'
+            ];
             
-            $banner = $this->Banners->patchEntity($banner, $this->request->getData());        
+            $data = $this->UploadImage->Banners($this->request->getData(), $config);
+
+            if(!($data)) {
+
+                $this->Flash->error(__('Verifique o formato e tamanho da imagem!'));
+                return $this->redirect(['action' => 'edit']); 
+            }
+            
+            $banner = $this->Banners->patchEntity($banner, $data);        
             $banner->status = 1;
             
             if($this->Banners->save($banner)) {

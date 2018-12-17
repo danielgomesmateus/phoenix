@@ -160,11 +160,11 @@ class UsersController extends AppController {
         if($this->request->is(['patch', 'post', 'put'])) {
             
             $config = [
-                'dir'  => 'users',
-                'type' => 'profile'
+                'dir'   => 'users',
+                'type'  => 'profile'
             ];
             
-            $data = $this->UploadImage->save($this->request->getData(), $config);
+            $data = $this->UploadImage->Images($this->request->getData(), $config);
 
             if(!($data)) {
 
