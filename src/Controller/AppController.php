@@ -63,6 +63,9 @@ class AppController extends Controller
         $pages = TableRegistry::get('Pages')->find()->select(['title', 'slug'])->where(['status' => 1])->toArray();
         $this->set('pages', $pages);
 
+        $blocks = TableRegistry::get('Blocks')->find()->select(['title', 'content'])->where(['status' => 1])->toArray();
+        $this->set('blocks', $blocks);    
+        
         if($this->Auth->user()) {
 
             $images = TableRegistry::get('Images');

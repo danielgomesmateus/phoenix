@@ -1,107 +1,135 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
-/**
- * Blocks Controller
- *
- * @property \App\Model\Table\BlocksTable $Blocks
- *
- * @method \App\Model\Entity\Block[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
-class BlocksController extends AppController
-{
+class BlocksController extends AppController {
 
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
-     */
-    public function index()
-    {
+    public function initialize() {
+
+        parent::initialize();
+    }
+
+    public function isAuthorized($user = null) {
+
+        if($user['role'] == 'admin') {
+            
+            return true;
+        }
+
+        return false;
+    }
+
+    public function beforeRender(Event $event) {
+
+        $actions = [
+            'index',
+            'add',
+            'edit',
+            'delete'
+        ];
+
+        if(in_array($this->request->action, $actions)) {
+
+            $this->viewBuilder()->theme('AdminLTE');
+            $this->viewBuilder()->setClassName('AdminLTE.AdminLTE');
+        }
+    }
+
+    public function index() {
+
         $blocks = $this->paginate($this->Blocks);
-
         $this->set(compact('blocks'));
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Block id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $block = $this->Blocks->get($id, [
-            'contain' => []
-        ]);
+    public function add() {
 
-        $this->set('block', $block);
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
         $block = $this->Blocks->newEntity();
-        if ($this->request->is('post')) {
+        
+        if($this->request->is('post')) {
+            
             $block = $this->Blocks->patchEntity($block, $this->request->getData());
-            if ($this->Blocks->save($block)) {
-                $this->Flash->success(__('The block has been saved.'));
 
+            $block->status = 1;
+            
+            if($this->Blocks->save($block)) {
+                
+                $this->Flash->success(__('Bloco salvo com sucesso!'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The block could not be saved. Please, try again.'));
+
+            $this->Flash->error(__('Erro ao salvar bloco! Tente novamente.'));
         }
+
         $this->set(compact('block'));
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Block id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
+
         $block = $this->Blocks->get($id, [
             'contain' => []
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
+        if($this->request->is(['patch', 'post', 'put'])) {
+            
             $block = $this->Blocks->patchEntity($block, $this->request->getData());
-            if ($this->Blocks->save($block)) {
-                $this->Flash->success(__('The block has been saved.'));
-
+            
+            if($this->Blocks->save($block)) {
+                
+                $this->Flash->success(__('Bloco salvo com sucesso!'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The block could not be saved. Please, try again.'));
+
+            $this->Flash->error(__('Erro ao salvar bloco! Tente novamente.'));
         }
+
         $this->set(compact('block'));
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Block id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
+
         $this->request->allowMethod(['post', 'delete']);
         $block = $this->Blocks->get($id);
-        if ($this->Blocks->delete($block)) {
-            $this->Flash->success(__('The block has been deleted.'));
-        } else {
-            $this->Flash->error(__('The block could not be deleted. Please, try again.'));
+        
+        if($this->Blocks->delete($block)) {
+            
+            $this->Flash->success(__('Bloco apagado com sucesso!'));
+        } 
+        else {
+            
+            $this->Flash->error(__('Erro ao apagar bloco! Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function alterStatus($id = null) {
+
+        if($this->request->is(['post', 'put'])) {
+            
+            if($id == null) {
+
+                $this->Flash->error(__('Bloco não encontrado!'));
+            }
+            else {
+
+                $blocks = TableRegistry::get('Blocks');
+                $block  = $blocks->get($id);
+
+                $status = $block->status == 1 ? 0 : 1;
+
+                $blocks->query()
+                       ->update()
+                       ->set(['status' => $status])
+                       ->where(['id' => $id])
+                       ->execute();
+                
+                $this->Flash->success(__('Bloco atualizado com sucesso!'));
+            }
+            
+            return $this->redirect(['controller' => 'blocks']);
+        }
     }
 }

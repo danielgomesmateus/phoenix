@@ -1,31 +1,24 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Block $block
- */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $block->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $block->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Blocks'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="blocks form large-9 medium-8 columns content">
-    <?= $this->Form->create($block) ?>
-    <fieldset>
-        <legend><?= __('Edit Block') ?></legend>
-        <?php
-            echo $this->Form->control('title');
-            echo $this->Form->control('content');
-            echo $this->Form->control('status');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<div class="container-fluid">
+    <div class="box box-primary" style="margin-top:15px;">
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                Editar bloco
+            </h3>
+        </div>
+        <?php echo $this->Form->create($block); ?>
+            <div class="box-body">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    <div class="form-group">
+                        <?php echo $this->Form->control('title', ['label' => 'Título:', 'class' => 'form-control', 'id' => 'title', 'required' => 'required', 'maxlength' => 50]); ?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Ck->input('content', ['label' => 'Conteúdo:', 'class' => 'form-control', 'id' => 'content', 'required' => 'required'], ['allowedContent' => 'true']); ?>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        <?php echo $this->Form->end(); ?>
+    </div>
 </div>
